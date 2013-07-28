@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>tabs</title>
+		<link rel="stylesheet" type="text/css" href="css/tabs.css" />
+		<link rel="stylesheet" type="text/css" href="css/tab-skin1.css">
+	</head>
+	<body>
+
+		<div class="wrapper">
+			<h2>default(click)</h2>
+			<p>This is a demo description.</p>
+			<div class="">
+				<ul class="demo0 tabs">
+					<li>tab1</li>
+					<li>tab2</li>
+					<li>tab3</li>
+				</ul>
+				<div class="panes0">
+					<div>panesasfsadfasdffffffffffffffffffffffffffffffffdsafdasdfsadfsadfsadfsadfsafsadfsadfsafdfsafasdfasdfsadfasfasdfasdfasdfasfdasfasfasfasfasdfsadfsdfasdfsafasfasdf</div>
+					<div>panlasfdasfasdfsafsafsafasdfe2</div>
+					<div>panlsafsafsafasdfdsfsdfsdfdsfdssssssssssssssfdfdfdfdfdddddddddddddddddddddddddddddddddddddddddddddddddde3</div>
+				</div>
+			</div>
+
+			<h2>ajax content</h2>
+			<p>This is a demo description.</p>
+			<div class="">
+				<ul class="demo1 tabs">
+					<li data-href="ajax1.txt">tab1</li>
+					<li data-href="ajax2.txt">tab2</li>
+					<li data-href="ajax3.txt">tab3</li>
+				</ul>
+				<div class="panes1">
+					<div></div>
+					<div></div>
+					<div></div>
+				</div>
+			</div>
+
+
+
+			<h2>mouseover</h2>
+			<p>This is a demo description.</p>
+			<div class="">
+				<ul class="demo2 tabs">
+					<li>tab1</li>
+					<li>tab2</li>
+					<li>tab3</li>
+				</ul>
+				<div class="panes2">
+					<div>panes</div>
+					<div>panle2</div>
+					<div>panle3</div>
+				</div>
+			</div>
+
+			<h2>initialIndex</h2>
+			<p>This is a demo description.</p>
+			<div class="">
+				<ul class="demo3 tabs">
+					<li>tab1</li>
+					<li>tab2</li>
+					<li>tab3</li>
+				</ul>
+				<div class="panes3">
+					<div>panes</div>
+					<div>panle2</div>
+					<div>panle3</div>
+				</div>
+			</div>
+
+			<h2>skin</h2>
+			<p>This is a demo description.</p>
+			<div class="">
+				<ul class="demo4 tabs">
+					<li>tab1</li>
+					<li>tab2</li>
+					<li>tab3</li>
+				</ul>
+				<div class="panes4">
+					<div>panes</div>
+					<div>panle2</div>
+					<div>panle3</div>
+				</div>
+			</div>
+
+			<h2>History</h2>
+			<p>This is a demo description.</p>
+			<div class="">
+				<ul class="demo5 tabs" id="tab1">
+					<li id="hello">tab1</li>
+					<li id="world">tab2</li>
+					<li id="too">tab3</li>
+				</ul>
+				<div class="panes5">
+					<div>panes</div>
+					<div>panle2</div>
+					<div>panle3</div>
+				</div>
+			</div>
+
+			<div class="">
+				<ul class="demo6 tabs" id="tab2">
+					<li>tab1</li>
+					<li>tab2</li>
+					<li>tab3</li>
+				</ul>
+				<div class="panes6">
+					<div>panes</div>
+					<div>panle2</div>
+					<div>panle3</div>
+				</div>
+			</div>
+
+			<h2>Keyboard</h2>
+			<p>This is a demo description.</p>
+			<div class="">
+				<ul class="demo7 tabs">
+					<li>tab1</li>
+					<li>tab2</li>
+					<li>tab3</li>
+				</ul>
+				<div class="panes7">
+					<div>panes</div>
+					<div>panle2</div>
+					<div>panle3</div>
+				</div>
+			</div>
+
+			<h2>test</h2>
+			<p>This is a demo description.</p>
+			<div "demo-test">
+				<button id="testGetTabs">Test Get Tabs</button>
+				<button id="testGetPanes">Test Get Panes</button>
+				<button id="testGetCurrentPane">Test Get Current Pane</button>
+				<button id="testGetCurrentTab">Test Current Tab</button>
+				<button id="testGetIndex">Test Get Index</button>
+				<button id="testNext">Test Next</button>
+				<button id="testPrev">Test Prev</button>
+				<button id="testDestroy">Test Destroy</button>
+			</div>
+		</div>
+
+		
+		<script type="text/javascript" src="js/vendor/jquery-1.8.3.min.js"></script>
+		<script type="text/javascript" src="js/vendor/jquery.history.js"></script>
+		<script type="text/javascript" src="js/jquery-tabs.js"></script>
+		<script>
+			$(function(){
+				$('.demo0').tabs({panes: '.panes0'});
+				$('.demo1').tabs({
+					panes: '.panes1', 
+					ajax: true, 
+					cached: true
+				});
+				$('.demo2').tabs({
+					panes: '.panes2',
+					event:'mouseover'
+				});
+				$('.demo3').tabs({
+					panes: '.panes3',
+					initialIndex: 2
+				});
+				$('.demo4').tabs({
+					panes: '.panes4',
+					skin: 'skin-1'
+				});
+
+				$('.demo5').tabs({
+					panes: '.panes5',
+					history: true
+				});
+				$('.demo6').tabs({
+					panes: '.panes6',
+					history: true
+				});
+
+				$('.demo7').tabs({
+					panes: '.panes7',
+					keyboard: true
+				});
+
+
+				$('#testGetTabs').click(function(){
+					console.info($('.demo4').tabs('getTabs'));
+				});
+
+				$('#testGetPanes').click(function(){
+					console.info($('.demo4').tabs('getPanes'));
+				});
+
+				$('#testGetIndex').click(function(){
+					console.info($('.demo4').tabs('getIndex'));
+				});
+
+				$('#testGetCurrentPane').click(function(){
+					console.info($('.demo4').tabs('getCurrentPane'));
+				});
+
+				$('#testGetCurrentTab').click(function(){
+					console.info($('.demo4').tabs('getCurrentTab'));
+				});
+
+				$('#testNext').click(function(){
+					console.info($('.demo4').tabs('next'));
+				});
+
+				$('#testPrev').click(function(){
+					console.info($('.demo4').tabs('prev'));
+				});
+
+				$('#testDestroy').click(function(){
+					console.info($('.demo4').tabs('destroy'));
+				});
+
+			});	
+		</script>
+	</body>
+</html>

@@ -1,0 +1,69 @@
+.wrapper {
+	padding: 20px;
+	margin: 20px 200px;
+}
+
+h2 {
+	max-width: 300px;
+	padding: 5px;
+	text-indent: 15px;
+	color: #FFFFFF;
+	background-color: #084A5E;
+
+	border-radius: 12px; 
+}
+
+div[class^="demo"] {
+	display: block;	
+	margin: 20px auto 30px;
+	padding: 20px;
+	border-top: 1px solid #EDEDED;
+	background-color: #FFFFFF;
+	border-radius: 6px;
+	box-shadow: 0 1px 3px #999999;
+}
+
+.tabs {
+	margin: 0;
+	padding: 0;
+	height: 32px;
+	border-bottom: 1px solid #666666;
+	list-style: none outside none;
+	-moz-box-sizing: border-box;
+}
+
+.tabs li {
+	float: left;
+	border: 1px solid #252525;
+	display: block;
+	color: #333333;	
+	font-size: 12px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	text-decoration: none;
+	width: 138px;
+	border-radius: 6px 6px 0 0;
+	background-color: #e0e0e0;
+	cursor: pointer;
+}
+
+.tabs li.tabs-active {
+	background-color: #fff;
+	border-bottom-color: transparent;
+}
+
+.panes {
+	padding: 15px;
+	border-right: 1px solid #252525;
+	border-bottom: 1px solid #252525;
+	border-left: 1px solid #252525;
+	border-radius: 0 0 6px 6px;
+}
+
+.panes > div {
+	display: none;
+}
+.panes .tabs-active {
+	display: block;
+}
