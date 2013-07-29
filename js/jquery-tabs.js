@@ -1,4 +1,4 @@
-/*! jQuery tabs - v0.1.1 - 2013-07-24
+/*! jQuery tabs - v0.1.1 - 2013-07-28
 * https://github.com/amazingSurge/jquery-tabs
 * Copyright (c) 2013 amazingSurge; Licensed GPL */
 ;(function(window, document, $, undefined) {
@@ -242,17 +242,35 @@
     var $doc = $(document);
     var history = {
         states: {},
-        reflash: false,
+        refresh: false,             // avoid repeating update
+        stopHashchangeEvent: false, // stop trigger hashChange when push state
+        on: function(eventType, callback) {
+            var self = this;
+            $(window).on(eventType, function(e) {
+                if (self.stopHashchangeEvent) {
+                    return false;
+                } else {
+                    callback(e);
+                    return false;
+                }
+                
+            });
+        },
+        off: function(eventType) {
+            $(window).off(eventType);
+        },
         pushState: function(state) {
             for (id in state) {
                 this.states[id] = state[id];
             }
-            this.reflash = false;
+            this.refresh = false;
+            this.stopHashchangeEvent = true;
             setTimeout($.proxy(this.changeStates,this), 0);
         },
         changeStates: function() {
-            var hash = '';
-            if (this.reflash === true) {
+            var self = this,
+                hash = '';
+            if (this.refresh === true) {
                 return;
             }
 
@@ -261,7 +279,10 @@
             });
 
             window.location.hash =  hash.substr(0, hash.length - 1);
-            this.reflash = true;
+            this.refresh = true;
+            setTimeout(function(){
+                self.stopHashchangeEvent = false;
+            },0);
         },
         getState: function() {
             var hash = window.location.hash.replace('#','').replace('!',''),
@@ -288,13 +309,13 @@
             return param;
         },
         reset: function() {
-            if (this.reflash === true) {
+            if (this.refresh === true) {
                 return;
             }
             this.states = {};
             window.location.hash = "#/";
 
-            this.reflash = true;
+            this.refresh = true;
         }
     };
 
@@ -302,24 +323,26 @@
         if (instance.options.history === false) {
             return;
         }
-        $(window).on('hashchange.tabs', function(e) {
+        var hashchange = function(e) {
             var states = history.getState(),
                 tabs,
                 id = instance.$element.attr('id'); 
-
+  
             if (states[id]) {
                 tabs = $('#'+id).data('tabs');
                 if (tabs) {
                     var $tab = instance.$element.find('#' + states[id]);
                     if ($tab.length >= 1) {
-                        $tab.click();
+                        tabs.active(instance.$tabItems.index($tab));
                     } else {
                         tabs.active(states[id]);
                     }
                     
                 }
             }
-        });   
+        };
+  
+        history.on('hashchange.tabs', hashchange); 
     });
 
     $doc.on('tabs::afterActive', function(event, instance) {
@@ -336,7 +359,6 @@
         } else {
             state[id] = index;
         }
-        
         history.pushState(state);
     });
 
